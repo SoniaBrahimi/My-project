@@ -1,0 +1,27 @@
+<div class="item">
+
+    <input [id]="item.description" type="checkbox" (change)="item.done = !item.done" [checked]="item.done" />
+    <label [for]="item.description">{{item.description}}</label>
+
+
+    <div class="btn-wrapper" *ngIf="!editable">
+        <button class="btn" (click)="editable = !editable">Edit</button>
+        <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+    </div>
+
+    <!-- This section shows only if user clicks Edit button -->
+    <div id="editMenu" *ngIf="editable">
+        <input class="sm-text-input" placeholder="edit item" [value]="item.description" #editedItem
+            (keyup.enter)="saveItem(editedItem.value, editedCategory.value)">
+
+        <select name="category" class="sm-text-input" id="category-select" [value]="item.category" #editedCategory>
+            <option value="">None</option>
+            <option value="work">work</option>
+            <option value="house">house</option>
+            <option value="activities">activities</option>
+            <option value="children">children</option>
+
+        </select>
+    </div>
+
+</div>
